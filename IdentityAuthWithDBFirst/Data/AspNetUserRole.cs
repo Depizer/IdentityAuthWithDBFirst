@@ -4,25 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityAuthWithDBFirst.Data;
 
-[PrimaryKey("UserId", "RoleId")]
-[Index("RoleId", Name = "IX_AspNetUserRoles_RoleId")]
-public partial class AspNetUserRole
+public partial class AspNetUserRole : IdentityUserRole<string>
 {
-    [Key]
-    public string UserId { get; set; }
-
-    [Key]
-    public string RoleId { get; set; }
-
-    [ForeignKey("RoleId")]
-    [InverseProperty("AspNetUserRoles")]
-    public virtual AspNetRole Role { get; set; }
-
-    [ForeignKey("UserId")]
-    [InverseProperty("AspNetUserRoles")]
-    public virtual AspNetUser User { get; set; }
 }
